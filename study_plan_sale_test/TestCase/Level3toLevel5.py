@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# @Time    : 2020/11/30 10:36 下午
+# @Time    : 2020/12/3 6:58 下午
 # @Author  : jiajia.gu
 import unittest
-
+from selenium.webdriver.common.touch_actions import TouchActions
 from study_plan_sale_test.config.config import url3
 from study_plan_sale_test.common.common import *
 from study_plan_sale_test.page.studyPlanPage import StudyPlan
 
 
-class Lv1ToLV3(unittest.TestCase):
+class Lv3ToLV5(unittest.TestCase):
 
     def setUp(self):
         u'''没有前置条件可以写pass'''
@@ -22,6 +22,11 @@ class Lv1ToLV3(unittest.TestCase):
         page = StudyPlan(driver)
         chooseStudyInfo(page)
         # driver.TouchActions.scroll("am-picker-col-mask", 0, +200).perform()
+        element1 = page.am_picker_col_indicator_loc()[0]
+        TouchActions(driver).long_press(element1)
+        TouchActions(driver).flick_element(element1, 0, 300, 30).perform()
+
+        time.sleep(3)
         page.study_plan_bt_btn_loc()[0].click()  # 选择完年龄点击完成水平测试
         time.sleep(5)
         page.imager_inner_loc()[2].click()  # 点击定制专属学习计划
@@ -30,10 +35,11 @@ class Lv1ToLV3(unittest.TestCase):
         time.sleep(5)
 
         get_sale_page(page)
+
         startingLevel = page.study_target_item_content_loc()[0].get_attribute('innerHTML')
         targetingLevel = page.study_target_item_content_loc()[1].get_attribute('innerHTML')
-        self.assertEqual(startingLevel, u'Lv.1', msg='失败') # 验证起始等级为lv1
-        self.assertEqual(targetingLevel, u'Lv.3', msg='失败')# 验证目标等级为lv3
+        self.assertEqual(startingLevel, u'Lv.3', msg='失败') # 验证起始等级为lv3
+        self.assertEqual(targetingLevel, u'Lv.5', msg='失败')# 验证目标等级为lv5
 
     def tearDown(self):
         u'''没有后置条件可以写pass'''

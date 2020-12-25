@@ -4,14 +4,14 @@
 # @Author  : jiajia.gu
 
 from selenium import webdriver
-from TestCase import *
+from study_plan_sale_test.TestCase import *
 import time
 from selenium.webdriver.common.touch_actions import TouchActions
 import unittest
 
-from config.config import url3
-from common.common import *
-from page.studyPlanPage import StudyPlan
+from study_plan_sale_test.config.config import url3
+from study_plan_sale_test.common.common import *
+from study_plan_sale_test.page.studyPlanPage import StudyPlan
 
 
 class Lv1ToLV2(unittest.TestCase):
@@ -33,15 +33,10 @@ class Lv1ToLV2(unittest.TestCase):
         time.sleep(5)
         page.select_item_loc()[1].click()  # 选择期望提升
         time.sleep(5)
+        get_sale_page(page)
 
-        page.imager_inner_loc()[0].click()  # 点击底部button
-        time.sleep(5)
-        page.ph_button_loc()[1].click()  # 选择学习时间
-        time.sleep(5)
-        page.imager_inner_loc()[0].click()  # 点击底部button
-        time.sleep(15)
-        startingLevel=driver.find_elements_by_class_name("study-target__item-content")[0].get_attribute('innerHTML')
-        targetingLevel=driver.find_elements_by_class_name("study-target__item-content")[1].get_attribute('innerHTML')
+        startingLevel = page.study_target_item_content_loc()[0].get_attribute('innerHTML')
+        targetingLevel = page.study_target_item_content_loc()[1].get_attribute('innerHTML')
         self.assertEqual(startingLevel, u'Lv.1', msg='失败') # 验证起始等级为lv1
         self.assertEqual(targetingLevel, u'Lv.2', msg='失败')# 验证目标等级为lv2
 
