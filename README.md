@@ -1,4 +1,8 @@
 # selenium-unittest-htmltestrunner
+
+##### 目录结构
+
+```
 ├── TeseCase   // 测试用例
 ├── common  // 公共方法
 ├── config //全局自定义配置
@@ -7,3 +11,5 @@
 ├── page   // 页面
 ├── HTMLTestRunner //测试报告
 └── run_test.py //  启动文件
+```
+
