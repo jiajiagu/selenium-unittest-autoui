@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 # @Time    : 2020/11/24 11:48 下午
 # @Author  : jiajia.gu
-
+from selenium import webdriver
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
@@ -29,5 +29,8 @@ class StudyPlan(BasePage):
     def select_item_loc(self):
         return self.class_name("select-item")
 
-    def select_age_loc(self):
+    def am_picker_col_indicator_loc(self):
         return self.class_name("am-picker-col-indicator")
+
+    def study_target_item_content_loc(self):
+        return self.class_name("study-target__item-content")
